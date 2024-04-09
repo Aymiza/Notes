@@ -11,6 +11,7 @@ fun LoginScreen (
     onNavToHomePage() -> Unit,
     onNavToSignUpPage:() -> Unit,
 ){
+
     val loginUiState = loginViewModel?.loginUiState
     val isError =   loginUiState?.loginError != null
     val context = LocalContext.current

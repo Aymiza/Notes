@@ -90,6 +90,7 @@ class LoginViewModel:ViewModel(
                     Toast.makeText(context, text"Failed Login", Toast.LENGHT_SHORT).show()
                     loginUiState = loginUiState.copy(isSucceesLogin = false)
                 }
+
             }
             catch (e:Exception){
                 loginUiState = loginUiState.copy(loginError = e.localizedMessage)
