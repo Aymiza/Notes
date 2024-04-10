@@ -1,10 +1,10 @@
 package com.example.notes.login
+
+import com.example.notes.repository.AuthRepository
 import androidx.lifecycle.ViewModel
-import java.lang.IllegalArgumentException
-import kotlin.math.log
 
 class LoginViewModel:ViewModel(
-    private val repository: AuthRepository = AuthRepository()
+    private val repository: Au
 ): ViewModel(){
     val currentUser = repository.currentUser
 
