@@ -89,7 +89,7 @@ fun LoginScreen(
             Text(text = "Sign In")
             
         }
-        Spacer(modifier = Modifier.size())
+        Spacer(modifier = Modifier.size(3.dp))
 
     }
 
