@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.notes.ui.theme.NotesTheme
 
 @Composable
@@ -50,7 +51,7 @@ fun LoginScreen(
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(),
+            .padding(16.dp),
         value = loginUiState?.userName?:"",
         onValueChange = {loginViewModel?.onUserNameChange(it)},
         leadingIcon = {
@@ -69,7 +70,7 @@ fun LoginScreen(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(),
+                .padding(16.dp),
             value = loginUiState?.password?:"",
             onValueChange = {loginViewModel?.onPasswordChange(it)},
             leadingIcon = {
@@ -89,7 +90,7 @@ fun LoginScreen(
             Text(text = "Sign In")
             
         }
-        Spacer(modifier = Modifier.size(3.dp))
+        Spacer(modifier = Modifier.size(16.dp))
 
     }
 

@@ -63,6 +63,8 @@ dependencies {
     implementation ("com.firebaseui:firebase-ui-auth:8.0.2")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("androidx.compose.ui:ui:x.x.x")
+    implementation("com.google.firebase:firebase-auth")
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation ("androidx.compose.foundation:foundation:x.x.x")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
