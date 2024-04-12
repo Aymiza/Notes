@@ -251,7 +251,7 @@ fun Text(text: String, style: Any, fontWeight: Int, color: Color) {
 fun PrevSignUpScreen() {
     NotesTheme {
 
-        LoginScreen(onNavHomePage = { /*TODO*/ }) {
+        SignUpScreen(onNavHomePage = { /*TODO*/ }) {
 
         }
     }
