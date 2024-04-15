@@ -38,7 +38,7 @@ class LoginViewModel(
     }
 
     fun onConfirmPassword(password: String) {
-        loginUiState = loginUiState.copy(confrimPasswordSignUp = password)
+        loginUiState = loginUiState.copy(confirmPasswordSignUp = password)
     }
 
     private fun validateLoginForm() =
@@ -48,7 +48,7 @@ class LoginViewModel(
     private fun validateSignUpForm() =
         loginUiState.userNameSignUp.isNotBlank() &&
                 loginUiState.passwordSignUp.isNotBlank() &&
-                loginUiState.confrimPasswordSignUp.isNotBlank()
+                loginUiState.confirmPasswordSignUp.isNotBlank()
 
 
     fun createUser(context:  Context) =viewModelScope.launch {
@@ -58,7 +58,7 @@ class LoginViewModel(
             }
             loginUiState = loginUiState.copy(isLoading = true)
             if (loginUiState.passwordSignUp !=
-                loginUiState.confrimPasswordSignUp){
+                loginUiState.confirmPasswordSignUp){
                 throw IllegalArgumentException("Password do not match")
 
             }
@@ -129,7 +129,7 @@ data class  LoginUiState(
     val password:String ="",
     val userNameSignUp:String = "",
     val passwordSignUp:String ="",
-    val confrimPasswordSignUp:String ="",
+    val confirmPasswordSignUp:String ="",
     val isLoading : Boolean = false,
     val isSuccessLogin:Boolean = false,
     val signUpError:String? = null,

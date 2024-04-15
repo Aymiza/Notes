@@ -184,7 +184,7 @@ fun SignUpScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            value = loginUiState?.confrimPasswordSignUp?:"",
+            value = loginUiState?.confirmPasswordSignUp?:"",
             onValueChange = {loginViewModel?.onpasswordChangeSignUp(it)},
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Lock, contentDescription =null,

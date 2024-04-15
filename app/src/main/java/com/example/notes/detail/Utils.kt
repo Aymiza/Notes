@@ -1,6 +1,10 @@
 package com.example.notes.detail
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.notes.login.LoginScreen
+import com.example.notes.ui.theme.NotesTheme
 
 object Utils {
     val colors =listOf(
@@ -15,4 +19,15 @@ object Utils {
         Color(0xFFcc0000),
         Color(0xFFff7f50),
     )
+}
+@Preview
+@Composable
+fun PrevLoginScreen() {
+    NotesTheme {
+
+        LoginScreen(onNavHomePage = { /*TODO*/ }) {
+
+        }
+    }
+
 }
