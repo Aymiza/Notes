@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     
                 ) 
                 {
-                    Greeting("Android")
+
                     Navigation(loginViewModel = loginViewModel)
                 }
 

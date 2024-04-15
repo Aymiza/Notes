@@ -5,6 +5,9 @@
       <entry key="PrevLoginScreen">
         <State />
       </entry>
+      <entry key="PrevSignUpScreen">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>

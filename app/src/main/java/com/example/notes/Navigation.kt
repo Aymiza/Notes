@@ -35,8 +35,11 @@ loginViewModel: LoginViewModel
 
                         inclusive = true
                     }
+
                 }
-            }) {
+
+            }, loginViewModel = loginViewModel
+            ) {
                     navController.navigate(LoginRoutes.Signup.name){
                         launchSingleTop = true
                         popUpTo(LoginRoutes.Signin.name){
@@ -52,9 +55,13 @@ loginViewModel: LoginViewModel
                     inclusive = true
                 }
             }
-            }) {
 
-                navController.navigate(LoginRoutes.Signin.name)
+            }, loginViewModel = loginViewModel
+            )
+
+            {
+
+                navController.navigate(LoginRoutes.Signup.name)
             }
         }
 
