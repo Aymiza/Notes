@@ -40,7 +40,7 @@ loginViewModel: LoginViewModel
 
             }, loginViewModel = loginViewModel
             ) {
-                    navController.navigate(LoginRoutes.Signup.name){
+                    navController.navigate(LoginRoutes.Signin.name){
                         launchSingleTop = true
                         popUpTo(LoginRoutes.Signin.name){
                             inclusive = true

@@ -28,11 +28,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.notes.ui.theme.NotesTheme
 
 @Composable
 fun LoginScreen(
-    loginViewModel: LoginViewModel? =null,
+    loginViewModel: LoginViewModel? =viewModel(),
     onNavHomePage: () -> Unit,
     onNavSignUpPage: () -> Unit,
 ) {
@@ -58,7 +59,8 @@ fun LoginScreen(
             .fillMaxWidth()
             .padding(16.dp),
         value = loginUiState?.userName?:"",
-        onValueChange = {loginViewModel?.onUserNameChange(it)},
+        onValueChange = {
+            loginViewModel?.onUserNameChange(it)},
         leadingIcon = {
             Icon(imageVector = Icons.Default.Person, contentDescription =null,
                 )
@@ -122,7 +124,7 @@ fun LoginScreen(
 }
 @Composable
 fun SignUpScreen(
-    loginViewModel: LoginViewModel? =null,
+    loginViewModel: LoginViewModel? =viewModel(),
     onNavHomePage: () -> Unit,
     onNavToLoginPage: () -> Unit,
 ) {
@@ -148,7 +150,8 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .padding(16.dp),
             value = loginUiState?.userNameSignUp?:"",
-            onValueChange = {loginViewModel?.onpasswordChangeSignUp(it)},
+            onValueChange = {
+                loginViewModel?.onpasswordChangeSignUp(it)},
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Person, contentDescription =null,
                 )
