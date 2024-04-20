@@ -25,7 +25,7 @@ object Utils {
 fun PrevLoginScreen() {
     NotesTheme {
 
-        LoginScreen(onNavHomePage = { /*TODO*/ }) {
+        LoginScreen(onNavToHomePage = { /*TODO*/ }) {
 
         }
     }

@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -34,8 +35,8 @@ import com.example.notes.ui.theme.NotesTheme
 @Composable
 fun LoginScreen(
     loginViewModel: LoginViewModel? =viewModel(),
-    onNavHomePage: () -> Unit,
-    onNavSignUpPage: () -> Unit,
+    onNavToHomePage: () -> Unit,
+    onNavToSignUpPage: () -> Unit,
 ) {
     val loginUiState=loginViewModel?.loginUiState
     val isError = loginUiState?.loginError != null
@@ -43,15 +44,20 @@ fun LoginScreen(
 
 
 
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally)
+    Column(modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        )
     {
         Text(text = "Login",
 
             fontWeight = FontWeight.Black.weight,
             style = MaterialTheme.typography.displayMedium,
-            color = MaterialTheme.colorScheme.primary)
+            color = MaterialTheme.colorScheme.primary
+        )
         if (isError){
-            Text(text = loginUiState?.loginError?: "unknown error", color = Red,)
+            Text(text = loginUiState?.loginError?: "unknown error",
+                color = Red,
+                )
         }
 
     OutlinedTextField(
@@ -81,14 +87,15 @@ fun LoginScreen(
             value = loginUiState?.password?:"",
             onValueChange = {loginViewModel?.onPasswordChange(it)},
             leadingIcon = {
-                Icon(imageVector = Icons.Default.Lock, contentDescription =null,
+                Icon(imageVector = Icons.Default.Lock,
+                    contentDescription =null,
                 )
             },
 
             label = {
                 Text(text = "Password")
             },
-
+            visualTransformation = PasswordVisualTransformation(),
             isError = isError
 
         )
@@ -105,7 +112,7 @@ fun LoginScreen(
         ){
             Text(text = "Don't have an account?")
             Spacer(modifier = Modifier.size(8.dp))
-            TextButton(onClick = { onNavSignUpPage.invoke() }) {
+            TextButton(onClick = { onNavToSignUpPage.invoke() }) {
                 Text(text = "Signup")
 
             }
@@ -115,7 +122,7 @@ fun LoginScreen(
             }
         LaunchedEffect(key1 = loginViewModel?.hasUser) {
             if (loginViewModel?.hasUser==true){
-                onNavHomePage.invoke()
+                onNavToHomePage.invoke()
             }
 
         }
@@ -125,11 +132,11 @@ fun LoginScreen(
 @Composable
 fun SignUpScreen(
     loginViewModel: LoginViewModel? =viewModel(),
-    onNavHomePage: () -> Unit,
+    onNavToHomePage: () -> Unit,
     onNavToLoginPage: () -> Unit,
 ) {
     val loginUiState=loginViewModel?.loginUiState
-    val isError = loginUiState?.loginError != null
+    val isError = loginUiState?.signUpError != null
     val context = LocalContext.current
 
 
@@ -151,9 +158,10 @@ fun SignUpScreen(
                 .padding(16.dp),
             value = loginUiState?.userNameSignUp?:"",
             onValueChange = {
-                loginViewModel?.onpasswordChangeSignUp(it)},
+                loginViewModel?.onUserNameChangeSignup(it)},
             leadingIcon = {
-                Icon(imageVector = Icons.Default.Person, contentDescription =null,
+                Icon(imageVector = Icons.Default.Person,
+                    contentDescription =null,
                 )
             },
 
@@ -188,7 +196,7 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .padding(16.dp),
             value = loginUiState?.confirmPasswordSignUp?:"",
-            onValueChange = {loginViewModel?.onpasswordChangeSignUp(it)},
+            onValueChange = {loginViewModel?.onConfirmPassword(it)},
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Lock, contentDescription =null,
                 )
@@ -197,7 +205,7 @@ fun SignUpScreen(
             label = {
                 Text(text = "Confirm Password")
             },
-
+            visualTransformation = PasswordVisualTransformation(),
             isError = isError
 
         )
@@ -225,7 +233,7 @@ fun SignUpScreen(
         }
         LaunchedEffect(key1 = loginViewModel?.hasUser) {
             if (loginViewModel?.hasUser==true){
-                onNavHomePage.invoke()
+                onNavToHomePage.invoke()
             }
 
         }
@@ -243,7 +251,7 @@ fun Text(text: String, style: Any, fontWeight: Int, color: Color) {
  fun PrevLoginScreen() {
      NotesTheme {
 
-         LoginScreen(onNavHomePage = { /*TODO*/ }) {
+         LoginScreen(onNavToHomePage = { /*TODO*/ }) {
 
          }
      }
@@ -254,7 +262,7 @@ fun Text(text: String, style: Any, fontWeight: Int, color: Color) {
 fun PrevSignUpScreen() {
     NotesTheme {
 
-        SignUpScreen(onNavHomePage = { /*TODO*/ }) {
+        SignUpScreen(onNavToHomePage = { /*TODO*/ }) {
 
         }
     }

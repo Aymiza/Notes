@@ -25,10 +25,11 @@ navController: NavHostController = rememberNavController(),
 loginViewModel: LoginViewModel
 
 ) {
-   NavHost(navController = navController, startDestination = LoginRoutes.Signin.name )
-    {
+   NavHost(navController = navController,
+       startDestination = LoginRoutes.Signin.name
+   ) {
         composable(route = LoginRoutes.Signin.name){
-            LoginScreen(onNavHomePage = {
+            LoginScreen(onNavToHomePage = {
                 navController.navigate(HomeRoutes.Home.name){
                     launchSingleTop = true
                     popUpTo(route = LoginRoutes.Signin.name){
@@ -40,7 +41,7 @@ loginViewModel: LoginViewModel
 
             }, loginViewModel = loginViewModel
             ) {
-                    navController.navigate(LoginRoutes.Signin.name){
+                    navController.navigate(LoginRoutes.Signup.name){
                         launchSingleTop = true
                         popUpTo(LoginRoutes.Signin.name){
                             inclusive = true
@@ -50,7 +51,7 @@ loginViewModel: LoginViewModel
         }
 
         composable(route = LoginRoutes.Signup.name){
-            SignUpScreen(onNavHomePage = {       navController.navigate(HomeRoutes.Home.name){
+            SignUpScreen(onNavToHomePage = {       navController.navigate(HomeRoutes.Home.name){
                 popUpTo(LoginRoutes.Signup.name){
                     inclusive = true
                 }
@@ -61,7 +62,7 @@ loginViewModel: LoginViewModel
 
             {
 
-                navController.navigate(LoginRoutes.Signup.name)
+                navController.navigate(LoginRoutes.Signin.name)
             }
         }
 

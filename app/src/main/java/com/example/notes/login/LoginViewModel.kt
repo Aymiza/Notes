@@ -69,11 +69,19 @@ class LoginViewModel(
             ){
                 isSuccessful ->
                 if (isSuccessful){
-                    Toast.makeText(context, "Success Login", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Success Login",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     loginUiState= loginUiState.copy(isSuccessLogin = true)
                 }
                 else {
-                    Toast.makeText(context, "Failed Login", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Failed Login",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     loginUiState= loginUiState.copy(isSuccessLogin = false)
                 }
             }
@@ -102,11 +110,19 @@ class LoginViewModel(
             ){
                     isSuccessful ->
                 if (isSuccessful){
-                    Toast.makeText(context, "Success Login", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Success Login",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     loginUiState= loginUiState.copy(isSuccessLogin = true)
                 }
                 else {
-                    Toast.makeText(context, "Failed Login", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Failed Login",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     loginUiState= loginUiState.copy(isSuccessLogin = false)
                 }
             }
