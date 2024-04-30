@@ -1,6 +1,8 @@
 package com.example.notes.home
 
+import android.provider.CalendarContract.Colors
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,6 +16,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.Card
@@ -57,10 +60,7 @@ import java.util.Locale
 //import java.text.SimpleDateFormat
 //import java.util.Locale
 
-@Composable
-fun NoteItem(notes: Any?, onLongClick: () -> Unit, content: () -> Unit) {
 
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -101,7 +101,7 @@ fun Home(
                         navToLoginPage.invoke()
                     }) {
                         Icon(
-                            imageVector = Icons.Default.ExitToApp, contentDescription = null,
+                            imageVector = Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null,
                         )
                     }
                 },
@@ -176,7 +176,9 @@ fun Home(
                     onClick = { onClick.invoke() }
                 )
                 .padding(8.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .background(color = Utils.colors[notes.colorIndex])
+
             //backgroundColor =Utils.colors[notes.colorIndex]
         ) {
 
@@ -223,6 +225,12 @@ fun Home(
 
 
 }
+
+@Composable
+fun NoteItem(notes: Notes, onLongClick: () -> Unit, content: () -> Unit) {
+
+}
+
 private fun formatDate(timestamp: Timestamp):String{
     val sdf = SimpleDateFormat("MM-dd-yy hh:mm", Locale.getDefault())
   return sdf.format(timestamp.toDate())
