@@ -5,11 +5,13 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -118,7 +120,7 @@ fun Home(
             )
         }
     ) { padding ->
-        Column(modifier = Modifier.padding()) {
+        Column(modifier = Modifier.padding(top = 44.dp)) {
             when (homeUiState.notesList) {
                 is Resources.Loading -> {
                     CircularProgressIndicator(
@@ -206,6 +208,7 @@ fun NoteItem(
     onLongClick: () -> Unit,
     onClick: () -> Unit
 ) {
+    val backgroundColor = Utils.colors[notes.colorIndex]
 //        val LocalContentAlpha = compositionLocalOf { 1F }
     Card(
         modifier = Modifier
@@ -215,21 +218,23 @@ fun NoteItem(
                 },
                 onClick = { onClick.invoke() }
             )
-            .padding(8.dp)
             .fillMaxWidth()
-            .background(color = Utils.colors[notes.colorIndex])
+            .padding(8.dp)
+
 
         //backgroundColor =Utils.colors[notes.colorIndex]
     ) {
 
-        Column {
+        Column(modifier = Modifier
+            .fillMaxWidth()) {
+            if (notes.colorIndex != 0) Box(modifier = Modifier.fillMaxWidth().height(12.dp).background(color = backgroundColor))
             Text(
                 text = notes.title,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
-                modifier = Modifier.padding(4.dp)
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
             )
             Spacer(modifier = Modifier.size(4.dp))
 
@@ -238,7 +243,7 @@ fun NoteItem(
                     text = notes.description,
                     style = MaterialTheme.typography.bodySmall,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(4.dp),
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                     maxLines = 4
                 )
             }
@@ -250,7 +255,7 @@ fun NoteItem(
                     style = MaterialTheme.typography.bodySmall,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
-                        .padding(4.dp)
+                        .padding(horizontal = 12.dp, vertical = 6.dp)
                         .align(Alignment.End),
                     maxLines = 4
                 )
