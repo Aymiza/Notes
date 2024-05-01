@@ -14,7 +14,7 @@ import com.example.notes.repository.StorageRepository
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val repository: StorageRepository
+    private val repository: StorageRepository = StorageRepository(),
 ):ViewModel() {
   var homeUiState by mutableStateOf(HomeUiState())
 

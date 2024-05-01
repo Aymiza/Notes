@@ -1,5 +1,6 @@
 package com.example.notes.login
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,9 +23,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,15 +45,18 @@ fun LoginScreen(
 
 
 
-    Column(modifier = Modifier.fillMaxSize(),
+    Column(
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         )
     {
-        Text(text = "Login",
-
-            fontWeight = FontWeight.Black.weight,
-            style = MaterialTheme.typography.displayMedium,
+        Text(text = "Login", style = TextStyle(
+            fontWeight = FontWeight.Bold,
+//            style = MaterialTheme.typography.displayMedium,
             color = MaterialTheme.colorScheme.primary
+        )
+
+
         )
         if (isError){
             Text(text = loginUiState?.loginError?: "unknown error",
@@ -68,7 +72,8 @@ fun LoginScreen(
         onValueChange = {
             loginViewModel?.onUserNameChange(it)},
         leadingIcon = {
-            Icon(imageVector = Icons.Default.Person, contentDescription =null,
+            Icon(imageVector = Icons.Default.Person,
+                contentDescription =null,
                 )
         },
 
@@ -100,7 +105,11 @@ fun LoginScreen(
 
         )
         
-        Button(onClick = { loginViewModel?.loginUser(context) }) {
+        Button(onClick = {
+
+            loginViewModel?.loginUser(context)
+        Log.d("username", "${loginUiState?.userName.toString()},${loginUiState?.password.toString()}")
+        }) {
             Text(text = "Sign In")
             
         }
@@ -144,10 +153,13 @@ fun SignUpScreen(
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally)
     {
         Text(text = "Sign Up",
-
-            fontWeight = FontWeight.Black.weight,
-            style = MaterialTheme.typography.displayMedium,
-            color = MaterialTheme.colorScheme.primary)
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+//            fontSize = ,
+            color = MaterialTheme.colorScheme.primary
+            )
+//
+        )
         if (isError){
             Text(text = loginUiState?.signUpError?: "unknown error", color = Red,)
         }
@@ -178,7 +190,7 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .padding(16.dp),
             value = loginUiState?.passwordSignUp?:"",
-            onValueChange = {loginViewModel?.onpasswordChangeSignUp(it)},
+            onValueChange = {loginViewModel?.onPasswordChangeSignUp(it)},
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Lock, contentDescription =null,
                 )
@@ -187,7 +199,7 @@ fun SignUpScreen(
             label = {
                 Text(text = "Password")
             },
-
+            visualTransformation = PasswordVisualTransformation(),
             isError = isError
 
         )
@@ -241,10 +253,7 @@ fun SignUpScreen(
 
 }
 
-fun Text(text: String, style: Any, fontWeight: Int, color: Color) {
 
-
-}
 
 @Preview(showSystemUi = true)
 @Composable
