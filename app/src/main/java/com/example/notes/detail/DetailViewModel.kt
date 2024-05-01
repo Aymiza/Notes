@@ -9,8 +9,8 @@ import com.example.notes.repository.StorageRepository
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseUser
 
-class detailViewModel(
-    private val  repository: StorageRepository
+class DetailViewModel(
+    private val  repository: StorageRepository = StorageRepository(),
 ):ViewModel() {
     var detailUiState by mutableStateOf(DetailUiState())
         private set
@@ -62,9 +62,11 @@ fun getNote(noteId:String){
     ){
         detailUiState=detailUiState.copy(selectedNote = it)
         detailUiState.selectedNote.let{ it1 ->
+
             if (it1 != null) {
                 setEditFields(it1)
             }
+
         }
 //        setEditFields(detailUiState.selectedNote)
     }

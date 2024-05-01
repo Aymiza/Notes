@@ -82,6 +82,9 @@ fun Home(
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
 
+    LaunchedEffect(key1 = Unit) {
+        homeViewModel?.loadNotes()
+    }
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = { navToDetailPage.invoke() }) {
@@ -159,77 +162,72 @@ fun Home(
         }
 
     }
-    @OptIn(ExperimentalFoundationApi::class)
-    @Composable
-    fun NoteItem(
-        notes: Notes,
-        onLongClick: () -> Unit,
-        onClick: () -> Unit
-    ) {
+
+
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun NoteItem(
+    notes: Notes,
+    onLongClick: () -> Unit,
+    onClick: () -> Unit
+) {
 //        val LocalContentAlpha = compositionLocalOf { 1F }
-        Card(
-            modifier = Modifier
-                .combinedClickable(
-                    onLongClick = {
-                        onLongClick.invoke()
-                    },
-                    onClick = { onClick.invoke() }
-                )
-                .padding(8.dp)
-                .fillMaxWidth()
-                .background(color = Utils.colors[notes.colorIndex])
+    Card(
+        modifier = Modifier
+            .combinedClickable(
+                onLongClick = {
+                    onLongClick.invoke()
+                },
+                onClick = { onClick.invoke() }
+            )
+            .padding(8.dp)
+            .fillMaxWidth()
+            .background(color = Utils.colors[notes.colorIndex])
 
-            //backgroundColor =Utils.colors[notes.colorIndex]
-        ) {
+        //backgroundColor =Utils.colors[notes.colorIndex]
+    ) {
 
-            Column {
+        Column {
+            Text(
+                text = notes.title,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Clip,
+                modifier = Modifier.padding(4.dp)
+            )
+            Spacer(modifier = Modifier.size(4.dp))
+
+            CompositionLocalProvider(LocalContentColor provides LocalContentColor.current.copy(alpha = 0.4f)) {
                 Text(
-                    text = notes.title,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Clip,
-                    modifier = Modifier.padding(4.dp)
+                    text = notes.description,
+                    style = MaterialTheme.typography.bodySmall,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(4.dp),
+                    maxLines = 4
                 )
-                Spacer(modifier = Modifier.size(4.dp))
-
-                CompositionLocalProvider(LocalContentColor provides LocalContentColor.current.copy(alpha = 0.4f)) {
-                                  Text(
-                        text = notes.description,
-                        style = MaterialTheme.typography.bodySmall,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(4.dp),
-                        maxLines = 4
-                    )
-                }
-
-                Spacer(modifier = Modifier.size(4.dp))
-                CompositionLocalProvider(LocalContentColor provides LocalContentColor.current.copy(alpha = 0.4f)) {
-                    Text(
-                        text = formatDate(notes.timestamp),
-                        style = MaterialTheme.typography.bodySmall,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier
-                            .padding(4.dp)
-                            .align(Alignment.End),
-                        maxLines = 4
-                    )
-                }
-
             }
-        }
 
+            Spacer(modifier = Modifier.size(4.dp))
+            CompositionLocalProvider(LocalContentColor provides LocalContentColor.current.copy(alpha = 0.4f)) {
+                Text(
+                    text = formatDate(notes.timestamp),
+                    style = MaterialTheme.typography.bodySmall,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .align(Alignment.End),
+                    maxLines = 4
+                )
+            }
+
+        }
     }
 
-
-
-
 }
 
-@Composable
-fun NoteItem(notes: Notes, onLongClick: () -> Unit, content: () -> Unit) {
-
-}
 
 private fun formatDate(timestamp: Timestamp):String{
     val sdf = SimpleDateFormat("MM-dd-yy hh:mm", Locale.getDefault())

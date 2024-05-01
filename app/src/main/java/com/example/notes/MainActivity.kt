@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.notes.detail.DetailViewModel
+import com.example.notes.home.HomeViewModel
 import com.example.notes.login.LoginViewModel
 import com.example.notes.ui.theme.NotesTheme
 
@@ -19,6 +21,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val loginViewModel = viewModel(modelClass = LoginViewModel::class.java)
+            val homeViewModel = viewModel(modelClass = HomeViewModel::class.java)
+            val detailViewModel = viewModel(modelClass = DetailViewModel::class.java)
             NotesTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -28,7 +32,11 @@ class MainActivity : ComponentActivity() {
                 ) 
                 {
 
-                    Navigation(loginViewModel = loginViewModel)
+                    Navigation(loginViewModel = loginViewModel,
+                        detailViewModel = detailViewModel,
+                        homeViewModel = homeViewModel
+
+                        )
                 }
 
             }

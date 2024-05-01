@@ -33,7 +33,7 @@ class LoginViewModel(
         loginUiState = loginUiState.copy(userNameSignUp = userName)
     }
 
-    fun onpasswordChangeSignUp(password: String) {
+    fun onPasswordChangeSignUp(password: String) {
         loginUiState = loginUiState.copy(passwordSignUp = password)
     }
 
@@ -42,7 +42,7 @@ class LoginViewModel(
     }
 
     private fun validateLoginForm() =
-        loginUiState.userName.isBlank() &&
+        loginUiState.userName.isNotBlank() &&
                 loginUiState.password.isNotBlank()
 
     private fun validateSignUpForm() =
