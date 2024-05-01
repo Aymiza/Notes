@@ -83,6 +83,7 @@ fun DetailScreen(
                             Log.d("add", "add")
                             detailViewModel?.addNotes()
                         }
+                         onNavigate.invoke()
                     },
 
                 )
