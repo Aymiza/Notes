@@ -65,7 +65,7 @@ class StorageRepository (){
             .document(noteId)
             .get()
             .addOnSuccessListener {
-                onSuccess.invoke(it?.toObject(Notes::class.java))
+                onSuccess.invoke(it?.toObject(Notes::class.java)!!)
             }
             .addOnFailureListener{result ->
                 onError.invoke(result.cause)
@@ -117,10 +117,6 @@ class StorageRepository (){
             }
     }
     fun signOut()= Firebase.auth.signOut()
-}
-
-private fun Any.invoke(notes: Notes?): DocumentSnapshot? {
-    TODO("Not yet implemented")
 }
 
 
