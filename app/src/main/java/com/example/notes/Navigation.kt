@@ -113,13 +113,12 @@ fun NavGraphBuilder.homeGraph(
         composable(HomeRoutes.Home.name)
         {
             Home(homeViewModel =homeViewModel ,
-                onNoteClick ={
-                             noteId->
-                             navController.navigate(
-                                 HomeRoutes.Detail.name + "id =$noteId"
-                             ){
-                                 launchSingleTop = true
-                             }
+                onNoteClick = { noteId->
+                    navController.navigate(
+                        HomeRoutes.Detail.name + "?id=$noteId"
+                     ){
+                         launchSingleTop = true
+                     }
                 } ,
                 navToDetailPage = {
                     navController.navigate(HomeRoutes.Detail.name)
@@ -135,7 +134,7 @@ fun NavGraphBuilder.homeGraph(
         }
 
         composable(
-            route = HomeRoutes.Detail.name + "?id ={id}",
+            route = HomeRoutes.Detail.name + "?id={id}",
             arguments = listOf(navArgument("id"){
                 type= NavType.StringType
                 defaultValue=""
