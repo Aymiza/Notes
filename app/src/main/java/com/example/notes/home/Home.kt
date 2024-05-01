@@ -1,6 +1,7 @@
 package com.example.notes.home
 
 import android.provider.CalendarContract.Colors
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -19,6 +20,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -142,6 +146,35 @@ fun Home(
 
                         }
                     }
+                    AnimatedVisibility(visible = openDialog) {
+                        AlertDialog(
+                            onDismissRequest = {
+                                openDialog = false
+                            },
+                            title = { Text(text = "Delete Note?") },
+                            confirmButton = {
+                                Button(
+                                    onClick = {
+                                        selectedNote?.documentId?.let {
+                                            homeViewModel?.deleteNote(it)
+                                        }
+                                        openDialog = false
+                                    },
+                                    colors =  ButtonDefaults.buttonColors(
+                                        containerColor  = Color.Red
+                                    ),
+                                ) {
+                                    Text(text = "Delete")
+                                }
+                            },
+                            dismissButton = {
+                                Button(onClick = { openDialog = false }) {
+                                    Text(text = "Cancel")
+                                }
+                            }
+                        )
+                    }
+
                 }
 
                 else -> {
